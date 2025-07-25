@@ -1,0 +1,27 @@
+# Configuration Jekyll pour le livre
+title: "Mon Livre"
+description: "Description de mon livre"
+baseurl: ""
+url: "https://hime-boo.github.io"
+
+# Collections
+collections:
+  stories:
+    output: true
+    permalink: /:name/
+    sort_by: order
+
+# Paramètres par défaut
+defaults:
+  - scope:
+      path: ""
+      type: "stories"
+    values:
+      layout: "story"
+
+# Configuration GitHub Pages
+plugins:
+  - jekyll-relative-links
+
+# Paramètres Markdown
+markdown: kramdown

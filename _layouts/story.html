@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+</head>
+<body>
+    <header>
+        <h1>{{ page.title }}</h1>
+    </header>
+
+    <main>
+        {{ content }}
+    </main>
+
+    <nav>
+        {% assign stories = site.stories | sort: 'order' %}
+        {% for story in stories %}
+            {% if story.order == page.order %}
+                {% assign current_index = forloop.index %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+
+        {% if current_index > 1 %}
+            {% assign prev_story = stories[current_index-2] %}
+            <a href="{{ prev_story.url | relative_url }}">&larr; {{ prev_story.title }}</a>
+        {% endif %}
+
+        {% if current_index < stories.size %}
+            {% assign next_story = stories[current_index] %}
+            <a href="{{ next_story.url | relative_url }}">{{ next_story.title }} &rarr;</a>
+        {% endif %}
+    </nav>
+</body>
+</html>
